@@ -1,18 +1,15 @@
-from fasthtml.common import *
-app, rt = fast_app()
+from flask import Flask, render_template, request, redirect, url_for
 
-@rt("/")
+app = Flask(__name__)
+
+
+@app.route("/")
 def index():
-    return Div(
-        P("Please upload resumes and job description"),
-        # Add form for file upload
-    )
+    return render_template('index.html')
 
-@rt("/results")
+@app.route('/results', methods=["POST"])
 def results():
-    return Div(
-        P("Results of the analysis"),
-        # Display Analysis results
-    )
+    return render_template('results.html')
 
-serve()
+if __name__=='__main__':
+    app.run(debug=True)
